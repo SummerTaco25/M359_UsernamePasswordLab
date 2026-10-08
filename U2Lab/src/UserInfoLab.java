@@ -23,21 +23,28 @@ public class UserInfoLab {
         String firstName = scan.nextLine();
         System.out.println("Type Last Name");
         String lastName = scan.nextLine();
+        System.out.println(generateUsername(firstName, lastName));
         System.out.println("Enter Password");
         String password = scan.nextLine();
+        if (validatePassword(password)){
+            System.out.println("Enter Credit Card Number");
+            String ccNumber = scan.nextLine();;
+            System.out.println(maskCreditCard(ccNumber));
+        }
+
     }
 
     public static String generateUsername(String firstName, String lastName) {
         String userName = "";
         firstName = firstName.toLowerCase();
         lastName = lastName.toLowerCase();
-        if (firstName.length() > 4){
+        if (firstName.length() >= 4){
             userName += firstName.substring(0,3);
         }
         else{
             userName += firstName;
         }
-        if (lastName.length() > 4){
+        if (lastName.length() >= 4){
             userName += lastName.substring(0,3);
         }
         else {
@@ -71,8 +78,17 @@ public class UserInfoLab {
         return false;
     }
     public static String maskCreditCard(String creditCardNumber) {
-        // Fill in this method and if the credit card is valid, return a masked CC
-        return "";
+        if (allDigits(creditCardNumber)){
+            if (creditCardNumber.length() == 16){
+                return "**** **** **** " + creditCardNumber.substring(12);
+            }
+            else {
+                return "N/A";
+            }
+        }
+        else{
+            return "N/A";
+        }
     }
 
     /**
